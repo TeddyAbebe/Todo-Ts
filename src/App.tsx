@@ -2,11 +2,12 @@ import React, { useState } from "react";
 import "./App.css";
 import InputField from "./Components/InputField";
 import { Todo } from "./model";
-// import TodoList from "./Components/TodoList";
+import TodoList from "./Components/TodoList";
 
 const App: React.FC = () => {
   const [todo, setTodo] = useState<string>("");
   const [todos, setTodos] = useState<Todo[]>([]);
+  const [completedTodos, setCompletedTodos] = useState<Todo[]>([]);
 
   const handleAdd = (e: React.FormEvent) => {
     e.preventDefault();
@@ -18,17 +19,16 @@ const App: React.FC = () => {
     }
   };
 
-  // console.log(todos);
   return (
     <div className="App">
       <span className="heading">Taskify</span>
       <InputField todo={todo} setTodo={setTodo} handleAdd={handleAdd} />
-
-      {/* <TodoList /> */}
-
-      {todos.map((t) => (
-        <p>{t.todo}</p>
-      ))}
+      <TodoList
+        todos={todos}
+        setTodos={setTodos}
+        completedTodos={completedTodos}
+        setCompletedTodos={setCompletedTodos}
+      />
     </div>
   );
 };
